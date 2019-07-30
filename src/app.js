@@ -7,6 +7,16 @@ import SearchForm from './Search'
 import ChartsOne from './chart'
 import Progress from './progress'
 
+//styling
+import {AppBar, Toolbar, Typography , Box, Grid} from '@material-ui/core'
+
+const styles={
+    center:{
+        'color': 'red',
+        'text-align': 'centre'
+    }
+}
+
 class App extends React.Component{
     constructor(){
         super()
@@ -58,13 +68,29 @@ class App extends React.Component{
     render(){
         return (
             <div>
-                <h1>Ticket Master</h1>
-                <h2>Listing Tickets - {this.state.tickets.length}</h2>
-                <Progress value = {this.state.originalTickets}/>
-                <SearchForm handleSearch = {this.handleSearch} handlePriorityClick = {this.handlePriorityClick} />
-                <TicketTable tickets={this.state.tickets} statusChange={this.statusChange} />
-                <TicketForm handleTicketSubmission = {this.handleTicketSubmission} />
-                <ChartsOne value = {this.state.originalTickets}/>
+                <AppBar>
+                    <Toolbar>
+                        <Typography align="center" style={{width: '100%'}} variant="h3" >
+                            Ticket Master
+                        </Typography>
+                    </Toolbar>
+                </AppBar><br />
+                {/* <Progress value = {this.state.originalTickets}/> */}
+                <Box style={{marginTop:40}}>
+                        <Typography  variant="h5">
+                            Listing Tickets - {this.state.tickets.length}
+                        </Typography> 
+                    <Grid container>
+                        <Grid sm={6}>                            
+                            <SearchForm handleSearch = {this.handleSearch} handlePriorityClick = {this.handlePriorityClick} />
+                            <TicketTable tickets={this.state.tickets} statusChange={this.statusChange} />   
+                        </Grid> 
+                        <Grid sm={6}>
+                            <TicketForm handleTicketSubmission = {this.handleTicketSubmission} />
+                        </Grid>
+                    </Grid>
+                    <ChartsOne value = {this.state.originalTickets}/>
+                </Box>
             </div>
         )
     }

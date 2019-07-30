@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {FormControl} from '@material-ui/core'
 
 class TicketForm extends React.Component {
     constructor(){
@@ -74,47 +75,49 @@ class TicketForm extends React.Component {
     render (){
         return(
             <div>
-                <form onSubmit = {this.handleSubmit}>
-                    <fieldset>
-                        <legend>Add Ticket</legend>
-                        <label>
-                            Name 
-                            <input type = "text" value = {this.state.name} onChange = {this.handleNameChange} />
-                            {this.state.errors.name && <span>{this.state.errors.name.join(', ')}</span>}
-                        </label> <br/>
-                        <label>
-                            Department
-                            <select value = {this.state.department} onChange = {this.handleDepartmentChange}>
-                                <option value ="">Select</option>
-                                {this.state.departmentOptions.map(dept => {
-                                    return <option key={dept.id} value={dept.name}>{dept.name.toUpperCase()}</option>
-                                })}
-                            </select>
-                            {this.state.errors.department && <span>{this.state.errors.department.join(', ')}</span>}
-                        </label> <br/>
-                        <label>
-                            Priority
-                            <select value = {this.state.priority} onChange = {this.handlePriorityChange.bind(this)}>
-                                <option value ="">Select</option>
-                                <option value ="high">High</option>
-                                <option value ="medium">Medium</option>
-                                <option value ="low">Low</option>
-                            </select>
-                            {this.state.errors.priority && <span>{this.state.errors.priority.join(', ')}</span>}
-                        </label> <br/>
-                        <label>
-                            Message 
-                            <textarea value={this.state.message} onChange={(e) => {
-                                //4th way
-                                const message = e.target.value
-                                this.setState(() => ({message}))
-                            }}></textarea>
-                            {this.state.errors.message && <span>{this.state.errors.message.join(', ')}</span>}
-                        </label> <br/>
-                        <input type="submit" /> 
-                        <button onClick={this.handleReset}>reset</button>
-                    </fieldset>
-                </form>
+                <FormControl>
+                    <form onSubmit = {this.handleSubmit} Validate autoComplete="off">
+                        <fieldset>
+                            <legend>Add Ticket</legend>
+                            <label>
+                                Name 
+                                <input type = "text" value = {this.state.name} onChange = {this.handleNameChange} />
+                                {this.state.errors.name && <span>{this.state.errors.name.join(', ')}</span>}
+                            </label> <br/>
+                            <label>
+                                Department
+                                <select value = {this.state.department} onChange = {this.handleDepartmentChange}>
+                                    <option value ="">Select</option>
+                                    {this.state.departmentOptions.map(dept => {
+                                        return <option key={dept.id} value={dept.name}>{dept.name.toUpperCase()}</option>
+                                    })}
+                                </select>
+                                {this.state.errors.department && <span>{this.state.errors.department.join(', ')}</span>}
+                            </label> <br/>
+                            <label>
+                                Priority
+                                <select value = {this.state.priority} onChange = {this.handlePriorityChange.bind(this)}>
+                                    <option value ="">Select</option>
+                                    <option value ="high">High</option>
+                                    <option value ="medium">Medium</option>
+                                    <option value ="low">Low</option>
+                                </select>
+                                {this.state.errors.priority && <span>{this.state.errors.priority.join(', ')}</span>}
+                            </label> <br/>
+                            <label>
+                                Message 
+                                <textarea value={this.state.message} onChange={(e) => {
+                                    //4th way
+                                    const message = e.target.value
+                                    this.setState(() => ({message}))
+                                }}></textarea>
+                                {this.state.errors.message && <span>{this.state.errors.message.join(', ')}</span>}
+                            </label> <br/>
+                            <input type="submit" /> 
+                            <button onClick={this.handleReset}>reset</button>
+                        </fieldset>
+                    </form>
+                </FormControl>
             </div>
         )
     }
