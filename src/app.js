@@ -10,13 +10,6 @@ import Progress from './progress'
 //styling
 import {AppBar, Toolbar, Typography , Box, Grid} from '@material-ui/core'
 
-const styles={
-    center:{
-        'color': 'red',
-        'text-align': 'centre'
-    }
-}
-
 class App extends React.Component{
     constructor(){
         super()
@@ -81,11 +74,11 @@ class App extends React.Component{
                             Listing Tickets - {this.state.tickets.length}
                         </Typography> 
                     <Grid container>
-                        <Grid sm={6}>                            
+                        <Grid sx={8} >                            
                             <SearchForm handleSearch = {this.handleSearch} handlePriorityClick = {this.handlePriorityClick} />
                             <TicketTable tickets={this.state.tickets} statusChange={this.statusChange} />   
                         </Grid> 
-                        <Grid sm={6}>
+                        <Grid style={{position: 'absolute',right: '0px',width: '300px',padding: '10px'}} sx={4} spacing={2} >
                             <TicketForm handleTicketSubmission = {this.handleTicketSubmission} />
                         </Grid>
                     </Grid>

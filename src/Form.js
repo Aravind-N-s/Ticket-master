@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {FormControl} from '@material-ui/core'
+import {FormControl, TextField, Button, Typography} from '@material-ui/core'
 
 class TicketForm extends React.Component {
     constructor(){
@@ -74,50 +74,59 @@ class TicketForm extends React.Component {
     }
     render (){
         return(
-            <div>
-                <FormControl>
-                    <form onSubmit = {this.handleSubmit} Validate autoComplete="off">
-                        <fieldset>
-                            <legend>Add Ticket</legend>
-                            <label>
-                                Name 
-                                <input type = "text" value = {this.state.name} onChange = {this.handleNameChange} />
-                                {this.state.errors.name && <span>{this.state.errors.name.join(', ')}</span>}
-                            </label> <br/>
-                            <label>
-                                Department
-                                <select value = {this.state.department} onChange = {this.handleDepartmentChange}>
-                                    <option value ="">Select</option>
+            <div style={{maxWeight:'50%'}}>
+                <form onSubmit = {this.handleSubmit}>
+                    <fieldset>
+                        <legend style={{fontWeight: "bold"}}>
+                            <h1>Add Ticket</h1>
+                        </legend>
+                        <FormControl>
+                            <TextField
+                                label="Name"
+                                value = {this.state.name} onChange = {this.handleNameChange}
+                                error = {this.state.errors.name}
+                                margin = "dense"
+                            />
+                            <TextField
+                                select
+                                label = "Department"
+                                error =  {this.state.errors.department}
+                                value = {this.state.department} onChange = {this.handleDepartmentChange}
+                                > 
+                                    (option =>
                                     {this.state.departmentOptions.map(dept => {
                                         return <option key={dept.id} value={dept.name}>{dept.name.toUpperCase()}</option>
                                     })}
-                                </select>
-                                {this.state.errors.department && <span>{this.state.errors.department.join(', ')}</span>}
-                            </label> <br/>
-                            <label>
-                                Priority
-                                <select value = {this.state.priority} onChange = {this.handlePriorityChange.bind(this)}>
-                                    <option value ="">Select</option>
-                                    <option value ="high">High</option>
-                                    <option value ="medium">Medium</option>
-                                    <option value ="low">Low</option>
-                                </select>
-                                {this.state.errors.priority && <span>{this.state.errors.priority.join(', ')}</span>}
-                            </label> <br/>
-                            <label>
-                                Message 
-                                <textarea value={this.state.message} onChange={(e) => {
+                                
+                            </TextField>
+                            <TextField
+                                select
+                                label="Priority"
+                                value = {this.state.priority} onChange = {this.handlePriorityChange.bind(this)}
+                                error = {this.state.errors.priority}>
+                                option => (
+                                    <option value={""}>Select</option>
+                                    <option value={"high"}>High</option>
+                                    <option value={"medium"}>Medium</option>
+                                    <option value={"low"}>Low</option>
+                                )
+                            </TextField>
+                            <TextField
+                                id="standard-multiline-static"
+                                label = "Message"
+                                Multiline rowsMax = "4"
+                                value={this.state.message} onChange={(e) => {
                                     //4th way
                                     const message = e.target.value
                                     this.setState(() => ({message}))
-                                }}></textarea>
-                                {this.state.errors.message && <span>{this.state.errors.message.join(', ')}</span>}
-                            </label> <br/>
-                            <input type="submit" /> 
-                            <button onClick={this.handleReset}>reset</button>
-                        </fieldset>
-                    </form>
-                </FormControl>
+                                }}
+                                error = {this.state.errors.message && <span>{this.state.errors.message.join(', ')}</span>}
+                            />
+                            <Button style={{marginTop: '10'}}varient="outlined" color="primary" type="submit">Submit</Button>
+                            <Button varient="contained" color="secondary" onClick={this.handleReset}>Reset</Button>
+                        </FormControl>    
+                    </fieldset>
+                </form>
             </div>
         )
     }

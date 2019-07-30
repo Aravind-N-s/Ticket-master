@@ -1,11 +1,12 @@
 import React from 'react'
-class Button extends React.Component{
+import {Button} from '@material-ui/core'
+class Buttons extends React.Component{
     render(){
         let value
         if(this.props.ticket.status == 'open'){
             value = this.props.ticket.ticket_code
         }else {
-            value = <button onClick = {this.props.remove}>Remove</button>
+            value = <Button onClick = {this.props.remove}>Remove</Button>
         }
         return (
             <div>
@@ -14,4 +15,4 @@ class Button extends React.Component{
         )
     }
 }
-export default Button
+export default Buttons

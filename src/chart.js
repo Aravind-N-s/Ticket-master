@@ -1,5 +1,6 @@
 import React from'react'
 import { Chart } from 'react-google-charts' 
+import {Grid} from '@material-ui/core'
 
 class ChartsOne extends React.Component { 
     render(props){
@@ -16,28 +17,32 @@ class ChartsOne extends React.Component {
             }
         })}
         return(
-            <div>
-                <Chart
-                    chartType = 'PieChart'
-                    loader={<div>Priority Pie Chart</div>}
-                    data={[
-                        ['Priority', 'Value'],
-                        ['High', high],
-                        ['Medium', medium],
-                        ['Low', low]
-                    ]}
-                />
-                <Chart
-                    chartType = 'Bar'
-                    loader={<div>Priority Bar Chart</div>}
-                    data = {[
-                        ['Priority', 'Value'],
-                        ['High', high],
-                        ['Medium', medium],
-                        ['Low', low]
-                    ]} 
-                />
-            </div>                
+            <Grid container>
+                <Grid item sm={6}>
+                    <Chart
+                        chartType = 'PieChart'
+                        loader={<div>Priority Pie Chart</div>}
+                        data={[
+                            ['Priority', 'Value'],
+                            ['High', high],
+                            ['Medium', medium],
+                            ['Low', low]
+                        ]}
+                    />
+                </Grid>
+                <Grid item sm={6}>
+                    <Chart
+                        chartType = 'Bar'
+                        loader={<div>Priority Bar Chart</div>}
+                        data = {[
+                            ['Priority', 'Value'],
+                            ['High', high],
+                            ['Medium', medium],
+                            ['Low', low]
+                        ]} 
+                    />
+                </Grid> 
+            </Grid>      
         )
     }
 }
